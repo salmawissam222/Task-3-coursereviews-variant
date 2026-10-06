@@ -34,6 +34,7 @@ valid.
 ## What was added on top of Task 1
 
 ### Server
+
 - `POST /api/auth/register`, `POST /api/auth/login` → `{ token, user }`;
   `GET /api/auth/me` (requires token).
 - `middleware/auth.js` — `requireAuth` reads `Authorization: Bearer <token>`,
@@ -49,6 +50,7 @@ valid.
   account.
 
 ### Client (`client/`, Vite + React + Tailwind)
+
 - `AuthContext` stores the token in `localStorage`, restores the session via
   `/auth/me`, and `api.js` attaches the token to every request.
 - Pages: Login, Register, Reviews (list + course summary lookup, edit/delete
@@ -66,7 +68,9 @@ This is roughly what the finished page should look like (filled in with example 
 ![Finished page](docs/write-review.png)
 
 ### TODO 1 — the form
+
 Render inputs bound to the `form` state:
+
 - `courseCode` — text input (e.g. `CS101`)
 - `rating` — select with options 1–5 (store it as a **number**, not a string)
 - `comment` — textarea (optional)
@@ -74,6 +78,7 @@ Render inputs bound to the `form` state:
 Implement `onChange` so every input updates `form`.
 
 ### TODO 2 — writing a review
+
 In `onSubmit`, send `POST /api/reviews` with `{ courseCode, rating, comment }`
 using the `api` instance from `client/src/api.js` (it already attaches your
 token). On success, navigate back to `/reviews`. On failure, show the
@@ -84,11 +89,12 @@ Do **not** send `reviewedBy` — the server takes the reviewer from your token
 and rejects the request if you send it.
 
 ### TODO 3 — editing a review
+
 When the URL has an `id`, load the review with `GET /api/reviews/:id` and fill
 the form with its `courseCode`, `rating` and `comment`. On submit, send
 `PATCH /api/reviews/:id` instead of `POST`. Editing someone else's review
 returns `403` — show that message too.
 
 You're expected to use AI tools while building this. But you should be able
-to explain, for any line in your component, *why* it's there and what
+to explain, for any line in your component, _why_ it's there and what
 happens if you delete it. We will ask.
